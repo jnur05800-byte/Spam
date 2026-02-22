@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web LabaLabi Helper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: sans-serif; background: #0b141a; color: white; padding: 20px; }
+        .box { background: #111b21; padding: 20px; border-radius: 10px; border: 1px solid #222e35; }
+        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; background: #2a3942; color: white; }
+        .btn-spam { background: #00a884; color: white; font-weight: bold; padding: 15px; border: none; width: 100%; border-radius: 5px; cursor: pointer; }
+        .btn-spam:hover { background: #06cf9c; }
+        .warning { color: #ffd700; font-size: 12px; text-align: center; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2 style="color:#00a884; text-align:center;">LabaLabi Web Clone</h2>
+    
+    <label>Nomor Target (Gunakan 62):</label>
+    <input type="number" id="phone" placeholder="62812345678">
+
+    <label>Isi Pesan:</label>
+    <textarea id="msg" placeholder="Ketik pesan..."></textarea>
+
+    <label>Jumlah (Spam):</label>
+    <select id="count">
+        <option value="10">10 Kali</option>
+        <option value="20">20 Kali</option>
+        <option value="30">30 Kali</option>
+        <option value="50">50 Kali</option>
+    </select>
+
+    <button class="btn-spam" onclick="startAction()">MULAI PROSES</button>
+    <p class="warning">Penting: Di versi Web, Anda tetap harus menekan tombol kirim di WhatsApp setelah jendela terbuka.</p>
+</div>
+
+<script>
+function startAction() {
+    const num = document.getElementById('phone').value;
+    const msg = document.getElementById('msg').value;
+    const loop = document.getElementById('count').value;
+
+    if(!num || !msg) {
+        alert("Isi nomor dan pesan dulu!");
+        return;
+    }
+
+    alert("Siap! Kami akan membuka " + loop + " tab WhatsApp. Pastikan browser tidak memblokir Popup!");
+
+    for (let i = 0; i < loop; i++) {
+        setTimeout(() => {
+            let url = `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }, i * 1500);
+    }
+}
+</script>
+
+</body>
+</html>
